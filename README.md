@@ -186,38 +186,38 @@ A análise exploratória dos dados revelou diferenças sistemáticas e marcantes
 A análise das palavras mais frequentes expõe uma diferença fundamental na estratégia de comunicação de cada tipo de conteúdo. As notícias falsas são dominadas por termos que evocam forte viés político e personalismo, como "hillary", "clinton", "obama" e "trump". A alta frequência desses nomes próprios sugere uma tática focada em polarização e resposta emocional, explorando figuras públicas como âncoras para a narrativa. Palavras como "us", "president" e "people" reforçam um foco em temas nacionais, muitas vezes no contexto de teorias da conspiração ou desinformação estratégica.
 
 Em contrapartida, as notícias reais apresentam um perfil linguístico mais neutro, factual e institucional. Termos como "washington", "united", "states" e "government" refletem um foco em processos, instituições e locais, em vez de personalidades. Expressões como "told", "could" e "house" indicam um discurso mais descritivo e cauteloso, característico do jornalismo profissional que visa relatar eventos em vez de provocar reações. Essa clara distinção lexical é uma das features mais poderosas para o modelo de classificação.
-![Imagem](https://github.com/guilherme-bortoletto/fake-news/edit/main/img/most_frequence_words.png)
+![Imagem](https://github.com/guilherme-bortoletto/fake-news/blob/main/img/most_frequence_words.png)
 
 #### 2. Nuvem de Palavras (Word Cloud)
 
 As nuvens de palavras reforçam e complementam visualmente os padrões identificados na análise de frequência. Na nuvem das **fake news**, o tamanho proeminente de nomes como "Trump", "Hillary" e "Clinton" confirma o foco avassalador em figuras políticas. A presença marcante desses nomes sugere que a notoriedade dessas personalidades é usada como um atalho para gerar engajamento e credibilidade fabricada.
 
 Em nítido contraste, a nuvem de palavras das **notícias reais** exibe um vocabulário mais distribuído e diversificado. Termos como "Washington", "United States", "government" e "House" são predominantes, refletindo uma abordagem mais sóbria e centrada em fatos institucionais. A visualização mostra que, enquanto as fake news giram em torno de poucos indivíduos, as notícias reais cobrem um espectro mais amplo de tópicos, o que é um indicador de práticas jornalísticas mais equilibradas.
-![Imagem](https://github.com/guilherme-bortoletto/fake-news/edit/main/img/word_cloud.png)
+![Imagem](https://github.com/guilherme-bortoletto/fake-news/blob/main/img/word_cloud.png)
 
 #### 3. Distribuição de Tamanho dos Textos
 
 A análise da distribuição do comprimento dos textos (em número de caracteres) revela que a maioria dos artigos, em ambas as classes, se concentra na faixa de 0 a 5.000 caracteres. Existe um pico notável em torno de 2.000 caracteres, onde a curva de notícias falsas (label 0) é ligeiramente mais alta, sugerindo uma tendência para textos um pouco mais curtos nessa categoria. Uma hipótese para esse padrão é que a desinformação é frequentemente otimizada para consumo rápido em plataformas de mídia social. Apesar dessa sutil diferença, as distribuições gerais são bastante semelhantes, indicando que o tamanho do texto, por si só, é uma feature de baixo poder preditivo em comparação com as características lexicais.
-![Imagem](https://github.com/guilherme-bortoletto/fake-news/edit/main/img/text_length.png)
+![Imagem](https://github.com/guilherme-bortoletto/fake-news/blob/main/img/text_length.png)
 
 #### 4. Frequência de Bigramas (Pares de Palavras)
 
 A análise de bigramas revela diferenças marcantes na construção frasal. Os conteúdos falsos são dominados por combinações que nomeiam figuras políticas, como "donald trump" e "hillary clinton". Esse padrão sugere uma estratégia deliberada de vincular a desinformação a personalidades com forte carga política, explorando vieses cognitivos preexistentes no público.
 
 Em contraste, as notícias reais apresentam uma estrutura mais convencional e profissional. Bigramas como "trump said" e "said statement" refletem a prática jornalística de atribuição clara de fontes. Da mesma forma, pares como "prime minister" e "north korea" demonstram uma cobertura mais ampla de temas internacionais. Essa diferença é crucial: as fake news focam em *quem* é o assunto, enquanto as notícias reais focam em *quem disse o quê*, um pilar da credibilidade jornalística.
-![Imagem](https://github.com/guilherme-bortoletto/fake-news/edit/main/img/bigrama.png)
+![Imagem](https://github.com/guilherme-bortoletto/fake-news/blob/main/img/bigrama.png)
 
 #### 5. Frequência de Trigramas (Trios de Palavras)
 
 Os trigramas revelam padrões ainda mais sofisticados de credibilidade e atribuição. Nas notícias falsas, destacam-se estruturas que tentam fabricar autoridade, como "century wire says" (uma fonte de baixa reputação) ou "president donald trump" usado de forma isolada para dar peso a uma alegação.
 
 Por outro lado, as notícias reais contêm trigramas que refletem práticas editoriais rigorosas, como "white house said" e "secretary state rex", que demonstram uma preocupação com a atribuição precisa de declarações a fontes reconhecidas. A variedade de combinações, incluindo nomes de oficiais e instituições, mostra uma cobertura mais contextualizada. Enquanto as fake news se apropriam de nomes para dar uma falsa impressão de legitimidade, as notícias reais os utilizam para construir uma narrativa factual e verificável.
-![Imagem](https://github.com/guilherme-bortoletto/fake-news/edit/main/img/trigrama.png)
+![Imagem](https://github.com/guilherme-bortoletto/fake-news/blob/main/img/trigrama.png)
 
 #### 6. Análise de Sentimento
 
 O gráfico de boxplot da polaridade de sentimento (onde -1.0 é negativo e +1.0 é positivo) mostra que as medianas de ambas as classes estão próximas de 0.0, indicando um tom majoritariamente neutro. Contudo, a análise da dispersão revela um insight importante: a classe **Fake** (vermelha) exibe uma variabilidade significativamente maior, com mais outliers nos extremos negativo e positivo. Isso sugere que as notícias falsas recorrem com mais frequência a uma linguagem carregada de emoção (tanto positiva quanto negativa) para gerar engajamento, indignação ou euforia. As notícias reais, embora possam cobrir eventos com carga emocional, tendem a manter uma distribuição de sentimento mais contida e próxima da neutralidade, refletindo um compromisso com a objetividade.
-![Imagem](https://github.com/guilherme-bortoletto/fake-news/edit/main/img/sentimento.png)
+![Imagem](https://github.com/guilherme-bortoletto/fake-news/blob/main/img/sentimento.png)
 
 #### 7. Análise de Features de Comprimento
 
