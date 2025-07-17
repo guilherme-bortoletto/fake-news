@@ -177,40 +177,48 @@ A matriz de confusão abaixo detalha os acertos e erros do modelo, onde a classe
   - Os erros foram mínimos: apenas **49** notícias verdadeiras foram classificadas como falsas (falsos positivos) e **51** notícias falsas foram consideradas verdadeiras (falsos negativos).
   - Essa alta taxa de acerto confirma que o modelo de Regressão Logística é extremamente eficaz e robusto para este problema.
 
-### Análise Quantitativa e Linguística
+### **Análise Quantitativa e Linguística**
 
-#### 1\. Palavras Mais Frequentes por Classe
+A análise exploratória dos dados revelou diferenças sistemáticas e marcantes entre os padrões linguísticos de notícias falsas e verdadeiras. Estes padrões, quando examinados em conjunto, formam uma "impressão digital" que permite a um modelo de machine learning classificar os textos com alta precisão.
 
-A análise das palavras mais frequentes revela padrões linguísticos distintos. Nas fake news, termos como "hillary", "clinton", "obama" e "trump" dominam o vocabulário, indicando um forte viés político e a utilização de figuras polarizadoras. Palavras como "us", "president" e "people" sugerem um foco em temas nacionais, frequentemente associados a teorias da conspiração. Além disso, o uso de termos como "would", "even" e "like" aponta para um tom mais hipotético e emocional.
+#### 1. Palavras Mais Frequentes por Classe
 
-Por outro lado, as notícias reais apresentam um perfil mais neutro e factual. Termos como "washington", "united", "states" e "government" refletem uma abordagem mais institucional. Expressões como "told", "could" e "house" indicam um discurso mais descritivo e menos carregado de emoção. Embora "trump" e "president" também apareçam, seu uso é menos dominante e mais contextualizado.
+A análise das palavras mais frequentes expõe uma diferença fundamental na estratégia de comunicação de cada tipo de conteúdo. As notícias falsas são dominadas por termos que evocam forte viés político e personalismo, como "hillary", "clinton", "obama" e "trump". A alta frequência desses nomes próprios sugere uma tática focada em polarização e resposta emocional, explorando figuras públicas como âncoras para a narrativa. Palavras como "us", "president" e "people" reforçam um foco em temas nacionais, muitas vezes no contexto de teorias da conspiração ou desinformação estratégica.
 
-#### 2\. Nuvem de Palavras (Word Cloud)
+Em contrapartida, as notícias reais apresentam um perfil linguístico mais neutro, factual e institucional. Termos como "washington", "united", "states" e "government" refletem um foco em processos, instituições e locais, em vez de personalidades. Expressões como "told", "could" e "house" indicam um discurso mais descritivo e cauteloso, característico do jornalismo profissional que visa relatar eventos em vez de provocar reações. Essa clara distinção lexical é uma das features mais poderosas para o modelo de classificação.
 
-As nuvens de palavras reforçam e complementam os padrões identificados. Na nuvem das **fake news**, destacam-se visualmente termos como "Trump", "Hillary" e "Clinton", confirmando o foco em figuras políticas. A presença marcante desses nomes sugere que as fake news se aproveitam de sua notoriedade para atrair atenção. Em contraste, a nuvem das **notícias reais** apresenta um vocabulário mais diversificado, com termos como "Washington", "United", "States" e "government" predominando, o que reflete uma abordagem mais institucional e factual.
+#### 2. Nuvem de Palavras (Word Cloud)
 
-#### 3\. Distribuição de Tamanho dos Textos
+As nuvens de palavras reforçam e complementam visualmente os padrões identificados na análise de frequência. Na nuvem das **fake news**, o tamanho proeminente de nomes como "Trump", "Hillary" e "Clinton" confirma o foco avassalador em figuras políticas. A presença marcante desses nomes sugere que a notoriedade dessas personalidades é usada como um atalho para gerar engajamento e credibilidade fabricada.
 
-A análise da distribuição do tamanho dos textos (em caracteres) mostra que a maioria se concentra na faixa de 0 a 5.000 caracteres. Observa-se um pico em torno de 2.000 caracteres, com a curva de textos falsos (`label 0`) ligeiramente mais alta nessa região, o que sugere que esses textos tendem a ser um pouco mais curtos. Apesar dessas diferenças sutis, as distribuições são bastante semelhantes, indicando que o tamanho, isoladamente, pode não ser um fator decisivo para a diferenciação.
+Em nítido contraste, a nuvem de palavras das **notícias reais** exibe um vocabulário mais distribuído e diversificado. Termos como "Washington", "United States", "government" e "House" são predominantes, refletindo uma abordagem mais sóbria e centrada em fatos institucionais. A visualização mostra que, enquanto as fake news giram em torno de poucos indivíduos, as notícias reais cobrem um espectro mais amplo de tópicos, o que é um indicador de práticas jornalísticas mais equilibradas.
 
-#### 4\. Frequência de Bigramas (Pares de Palavras)
+#### 3. Distribuição de Tamanho dos Textos
 
-A análise de bigramas revela diferenças marcantes. Nos conteúdos falsos, observa-se uma predominância de combinações envolvendo figuras políticas, como "donald trump" e "hillary clinton". Este padrão sugere uma estratégia de associar a desinformação a personalidades já carregadas de significado político. Em contraste, as notícias reais apresentam uma estrutura mais convencional. Bigramas como "trump said" seguem o padrão profissional de atribuição de fontes, enquanto combinações como "prime minister" e "north korea" demonstram uma cobertura mais ampla de temas internacionais.
+A análise da distribuição do comprimento dos textos (em número de caracteres) revela que a maioria dos artigos, em ambas as classes, se concentra na faixa de 0 a 5.000 caracteres. Existe um pico notável em torno de 2.000 caracteres, onde a curva de notícias falsas (label 0) é ligeiramente mais alta, sugerindo uma tendência para textos um pouco mais curtos nessa categoria. Uma hipótese para esse padrão é que a desinformação é frequentemente otimizada para consumo rápido em plataformas de mídia social. Apesar dessa sutil diferença, as distribuições gerais são bastante semelhantes, indicando que o tamanho do texto, por si só, é uma feature de baixo poder preditivo em comparação com as características lexicais.
 
-#### 5\. Frequência de Trigramas (Trios de Palavras)
+#### 4. Frequência de Bigramas (Pares de Palavras)
 
-A análise de trigramas revela padrões ainda mais distintos. Nos conteúdos falsos, destacam-se estruturas que combinam termos institucionais com alegações não verificadas, como "century wire says". A presença marcante de "president barack obama" e "president donald trump" indica a apropriação de cargos para dar aparência de legitimidade. Notícias reais, por outro lado, apresentam trigramas que refletem práticas jornalísticas convencionais, como "white house said" e "secretary state rex", demonstrando preocupação com a atribuição precisa de declarações.
+A análise de bigramas revela diferenças marcantes na construção frasal. Os conteúdos falsos são dominados por combinações que nomeiam figuras políticas, como "donald trump" e "hillary clinton". Esse padrão sugere uma estratégia deliberada de vincular a desinformação a personalidades com forte carga política, explorando vieses cognitivos preexistentes no público.
 
-#### 6\. Análise de Sentimento
+Em contraste, as notícias reais apresentam uma estrutura mais convencional e profissional. Bigramas como "trump said" e "said statement" refletem a prática jornalística de atribuição clara de fontes. Da mesma forma, pares como "prime minister" e "north korea" demonstram uma cobertura mais ampla de temas internacionais. Essa diferença é crucial: as fake news focam em *quem* é o assunto, enquanto as notícias reais focam em *quem disse o quê*, um pilar da credibilidade jornalística.
 
-O gráfico de boxplot mostra a distribuição dos escores de sentimento, variando de -1.0 (negativo) a +1.0 (positivo). As medianas de ambas as classes estão próximas de 0.0, sugerindo que os textos, em média, tendem ao sentimento neutro. No entanto, a classe **Fake** (vermelha) exibe uma dispersão ligeiramente maior de sentimentos negativos, com alguns outliers em extremos negativos. Isso pode indicar que textos falsos, em certos casos, carregam uma carga emocional mais negativa, o que pode ser uma feature útil para a detecção.
+#### 5. Frequência de Trigramas (Trios de Palavras)
 
-#### 7\. Análise de Features de Comprimento
+Os trigramas revelam padrões ainda mais sofisticados de credibilidade e atribuição. Nas notícias falsas, destacam-se estruturas que tentam fabricar autoridade, como "century wire says" (uma fonte de baixa reputação) ou "president donald trump" usado de forma isolada para dar peso a uma alegação.
 
-Os dados revelam padrões sutis na estrutura textual. Em média, os textos classificados como fake news apresentam uma extensão ligeiramente maior, tanto em caracteres quanto em palavras. Esses resultados sugerem que conteúdos falsos podem adotar estratégias de maior detalhamento ou repetição para reforçar suas narrativas.
+Por outro lado, as notícias reais contêm trigramas que refletem práticas editoriais rigorosas, como "white house said" e "secretary state rex", que demonstram uma preocupação com a atribuição precisa de declarações a fontes reconhecidas. A variedade de combinações, incluindo nomes de oficiais e instituições, mostra uma cobertura mais contextualizada. Enquanto as fake news se apropriam de nomes para dar uma falsa impressão de legitimidade, as notícias reais os utilizam para construir uma narrativa factual e verificável.
 
-| Classe | Média de Caracteres (text\_length) | Média de Palavras (word\_count) |
-|:---|:---:|:---:|
+#### 6. Análise de Sentimento
+
+O gráfico de boxplot da polaridade de sentimento (onde -1.0 é negativo e +1.0 é positivo) mostra que as medianas de ambas as classes estão próximas de 0.0, indicando um tom majoritariamente neutro. Contudo, a análise da dispersão revela um insight importante: a classe **Fake** (vermelha) exibe uma variabilidade significativamente maior, com mais outliers nos extremos negativo e positivo. Isso sugere que as notícias falsas recorrem com mais frequência a uma linguagem carregada de emoção (tanto positiva quanto negativa) para gerar engajamento, indignação ou euforia. As notícias reais, embora possam cobrir eventos com carga emocional, tendem a manter uma distribuição de sentimento mais contida e próxima da neutralidade, refletindo um compromisso com a objetividade.
+
+#### 7. Análise de Features de Comprimento
+
+Os dados revelam padrões sutis, porém consistentes, na estrutura textual. Em média, os textos classificados como fake news são ligeiramente mais longos, tanto em caracteres (1740.86 vs. 1719.16) quanto em palavras (230.74 vs. 226.66). Esse achado, embora com uma diferença pequena, pode contradizer a percepção de que a desinformação é sempre superficial. Uma hipótese é que alguns conteúdos falsos utilizam uma linguagem mais prolixa e com excesso de detalhes para criar uma falsa aura de profundidade e autoridade, tentando sobrecarregar o leitor com informações para parecerem mais críveis.
+
+| Classe | Média de Caracteres | Média de Palavras |
+| :--- | :---: | :---: |
 | **Fake News (0)** | 1740.86 | 230.74 |
 | **Notícias Reais (1)** | 1719.16 | 226.66 |
 
