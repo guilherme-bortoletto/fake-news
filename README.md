@@ -171,8 +171,7 @@ A matriz de confusão abaixo detalha os acertos e erros do modelo, onde a classe
 | **Verdadeiro: Falso (0)** | 4684 ✅ (Verdadeiro Negativo - TN) | 49 ❌ (Falso Positivo - FP) |
 | **Verdadeiro: Real (1)** | 51 ❌ (Falso Negativo - FN)       | 4196 ✅ (Verdadeiro Positivo - TP) |
 
-##### 🧠 Interpretação:
-
+##### Interpretação:
   - O modelo classificou corretamente **4684** notícias falsas e **4196** notícias verdadeiras.
   - Os erros foram mínimos: apenas **49** notícias verdadeiras foram classificadas como falsas (falsos positivos) e **51** notícias falsas foram consideradas verdadeiras (falsos negativos).
   - Essa alta taxa de acerto confirma que o modelo de Regressão Logística é extremamente eficaz e robusto para este problema.
