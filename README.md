@@ -22,7 +22,7 @@ Nosso objetivo é demonstrar a aplicação de tecnologias NoSQL e frameworks de 
   * **Python 3.x**
   * **Pymongo:** Para interação direta com o MongoDB Atlas.
   * **Pandas:** Para manipulação e análise de dados.
-  * **Scikit-learn:** Para pré-processamento, vetorização (TF-IDF) e treinamento do modelo de Machine Learning (Multinomial Naive Bayes).
+  * **Scikit-learn:** Para pré-processamento, vetorização (TF-IDF) e treinamento do modelos.
   * **NLTK:** Para processamento de linguagem natural (stopwords).
   * **Matplotlib / Seaborn:** Para visualização de dados e geração de gráficos.
 
@@ -44,7 +44,7 @@ O projeto foi estruturado seguindo um pipeline claro de processamento de dados, 
 2.  **Ingestão no Banco de Dados**: Cada notícia foi convertida para o formato JSON e inserida em uma *collection* específica (`Fake` ou `Real`) no cluster do MongoDB Atlas.
 3.  **Conexão e Leitura**: Utilizando um notebook no ambiente Databricks, estabelecemos a conexão com o MongoDB Atlas via `Pymongo` e carregamos os dados para análise.
 4.  **Processamento e Vetorização**: Os textos foram processados com técnicas de NLP (limpeza, tokenização, remoção de stopwords) e transformados em vetores numéricos com a técnica **TF-IDF**.
-5.  **Treinamento do Modelo**: Um modelo de classificação **Multinomial Naive Bayes** foi treinado com os dados vetorizados para distinguir entre notícias falsas e verdadeiras.
+5.  **Treinamento do Modelo**: Um modelo de classificação de **Regressão Logística** foi treinado com os dados vetorizados para distinguir entre notícias falsas e verdadeiras.
 6.  **Análise e Avaliação**: Foram realizadas análises exploratórias para identificar padrões linguísticos (palavras mais frequentes, n-gramas, análise de sentimento) e o modelo foi avaliado quanto à sua acurácia e outras métricas de desempenho.
 
 ### Fluxograma do Pipeline
@@ -71,7 +71,7 @@ graph TD
         D["Processamento e Vetorização
         (scikit-learn e TF-IDF)"];
         E["Treinamento do Modelo
-        (Naive Bayes)"];
+        (Regressão Logística)"];
         F["Análise Textual Exploratória
         (N-gramas e Sentimento)"];
         G{{Modelo Classificador}};
@@ -136,53 +136,46 @@ Para replicar o ambiente do projeto, siga os passos abaixo:
 
 
 --
-
 ## Análise Detalhada e Resultados
 
 Nesta fase, o desempenho do modelo de classificação foi rigorosamente avaliado e uma análise quantitativa aprofundada foi realizada para extrair padrões linguísticos e estatísticos dos textos.
 
-### Avaliação de Desempenho do Modelo
+### Avaliação de Desempenho do Modelo (Regressão Logística)
 
-O modelo treinado com **Multinomial Naive Bayes** apresentou um excelente desempenho na tarefa de detecção automática de *fake news*. A avaliação no conjunto de teste resultou em uma **acurácia de 93%**, com métricas equilibradas para ambas as classes (notícias falsas e verdadeiras).
+Para este projeto, foram testados diferentes modelos de classificação para a tarefa de detecção de fake news. Dentre as abordagens avaliadas, o modelo de Regressão Logística foi o que apresentou a melhor performance, demonstrando uma capacidade excepcional de distinguir entre os textos com uma acurácia de 99% no conjunto de teste, além de métricas de precisão e recall quase perfeitas para ambas as classes.
 
-#### Métricas Principais (Por Classe):
-
-| **Métrica** | **Classe 0 (Falso)** | **Classe 1 (Real)** | **Explicação** |
-|:---|:---:|:---:|:---|
-| **Precisão** | 0.93 | 0.93 | De todas as notícias que o modelo previu como falsas/reais, 93% estavam corretas. |
-| **Recall** | 0.94 | 0.93 | O modelo identificou corretamente 94% de todas as notícias falsas e 93% das reais. |
-| **F1-Score** | 0.94 | 0.93 | Média harmônica que indica um ótimo equilíbrio entre precisão e recall. |
-
-
-#### Relatório de Classificação Completo:
+#### Relatório de Classificação:
 
 ```
               precision    recall  f1-score   support
 
-           0       0.93      0.94      0.94      4733
-           1       0.93      0.93      0.93      4247
+           0       0.99      0.99      0.99      4733
+           1       0.99      0.99      0.99      4247
 
-    accuracy                           0.93      8980
-   macro avg       0.93      0.93      0.93      8980
-weighted avg       0.93      0.93      0.93      8980
+    accuracy                           0.99      8980
+   macro avg       0.99      0.99      0.99      8980
+weighted avg       0.99      0.99      0.99      8980
 ```
 
-#### Matriz de Confusão
+#### Matriz de Confusão:
 
-A matriz de confusão detalha os acertos e erros do modelo:
+A matriz de confusão abaixo detalha os acertos e erros do modelo, onde a classe `0` representa notícias falsas e a `1`, notícias verdadeiras.
+
+```
+[[4684   49]
+ [  51 4196]]
+```
 
 |                         | **Previsto: Falso (0)** | **Previsto: Real (1)** |
 |:------------------------|:-----------------------:|:------------------------:|
-| **Verdadeiro: Falso (0)** | 4452 ✅ (Verdadeiro Negativo - TN) | 281 ❌ (Falso Positivo - FP) |
-| **Verdadeiro: Real (1)** | 317 ❌ (Falso Negativo - FN)       | 3930 ✅ (Verdadeiro Positivo - TP) |
+| **Verdadeiro: Falso (0)** | 4684 ✅ (Verdadeiro Negativo - TN) | 49 ❌ (Falso Positivo - FP) |
+| **Verdadeiro: Real (1)** | 51 ❌ (Falso Negativo - FN)       | 4196 ✅ (Verdadeiro Positivo - TP) |
 
 ##### 🧠 Interpretação:
 
-  - **4452** notícias falsas foram corretamente classificadas como falsas (**Verdadeiros Negativos**).
-  - **3930** notícias verdadeiras foram corretamente classificadas como verdadeiras (**Verdadeiros Positivos**).
-  - O modelo cometeu poucos erros relativos: **281** notícias verdadeiras foram incorretamente classificadas como falsas (**Falsos Positivos**) e **317** notícias falsas foram incorretamente classificadas como verdadeiras (**Falsos Negativos**).
-
-Esses resultados confirmam que o modelo está **bem equilibrado** e apresenta **excelente desempenho**, com baixas taxas de falsos positivos e falsos negativos.
+  - O modelo classificou corretamente **4684** notícias falsas e **4196** notícias verdadeiras.
+  - Os erros foram mínimos: apenas **49** notícias verdadeiras foram classificadas como falsas (falsos positivos) e **51** notícias falsas foram consideradas verdadeiras (falsos negativos).
+  - Essa alta taxa de acerto confirma que o modelo de Regressão Logística é extremamente eficaz e robusto para este problema.
 
 ### Análise Quantitativa e Linguística
 
