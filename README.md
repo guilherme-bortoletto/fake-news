@@ -5,15 +5,9 @@
 
 ## Conceito do projeto
 
-O projeto tem como foco o desenvolvimento de um pipeline completo para a detecção automática de fake news, integrando tecnologias de armazenamento e processamento de dados. Utilizando o **MongoDB Atlas** como banco de dados NoSQL e a biblioteca **Pymongo** em um ambiente **Databricks** para a análise e processamento, o sistema é capaz de armazenar, transformar e analisar milhares de notícias jornalísticas.
+No cenário atual de sobrecarga de informação, a disseminação de notícias falsas (fake news) se tornou um desafio crítico para a sociedade. A velocidade com que a desinformação se espalha pode impactar desde debates públicos até a saúde das pessoas. Motivados por este problema, nós nos propusemos a explorar como tecnologias de processamento de dados em larga escala poderiam ser aplicadas para construir uma ferramenta eficaz de detecção automática.
 
-Nosso objetivo é demonstrar a aplicação de tecnologias NoSQL e frameworks de processamento para:
-
-  * Armazenar de forma flexível e escalável um volume significativo de notícias.
-  * Processar dados textuais em larga escala utilizando técnicas de NLP (*Natural Language Processing*).
-  * Treinar e avaliar um modelo de *machine learning* para classificar notícias.
-  * Avaliar a viabilidade da arquitetura proposta no contexto de aplicações robustas.
-  * Identificar padrões linguísticos, como as palavras mais frequentes em textos de *fake news*.
+Assim nasceu este projeto, com o objetivo de desenvolver um pipeline completo — desde o armazenamento até a análise e classificação — capaz de processar milhares de notícias. Buscamos não apenas criar um modelo de machine learning preciso, mas também investigar os padrões linguísticos que diferenciam conteúdos verdadeiros de falsos, demonstrando na prática a viabilidade de uma arquitetura de dados robusta para uma aplicação real de Processamento de Linguagem Natural (NLP).
 
 ## Pré-requisitos e recursos utilizados
 
@@ -38,7 +32,7 @@ Nosso objetivo é demonstrar a aplicação de tecnologias NoSQL e frameworks de 
 
 ## Passo a passo
 
-O projeto foi estruturado seguindo um pipeline claro de processamento de dados, desde a coleta até a análise e avaliação do modelo.
+Nossa metodologia seguiu um pipeline claro de processamento de dados, dividido nas seguintes etapas principais:
 
 1.  **Obtenção dos Dados**: Download dos arquivos `Fake.csv` e `True.csv` a partir da fonte de dados no Kaggle.
 2.  **Ingestão no Banco de Dados**: Cada notícia foi convertida para o formato JSON e inserida em uma *collection* específica (`Fake` ou `Real`) no cluster do MongoDB Atlas.
@@ -127,7 +121,11 @@ Para replicar o ambiente do projeto, siga os passos abaixo:
 
 ## Bugs/problemas conhecidos
 
-  * **Mudança de Estratégia de Processamento:** O plano inicial era utilizar **PySpark** no Databricks para o processamento distribuído. Contudo, devido a limitações da versão **Databricks Community Edition**, que removeu o acesso a clusters computacionais em seu plano gratuito, o conector `spark-mongodb` tornou-se inviável. Como solução, o projeto foi adaptado para usar a biblioteca **Pymongo** para interação direta com o MongoDB, mantendo a integridade do pipeline, embora sem o processamento distribuído do Spark.
+Nossa visão inicial para o projeto era utilizar o poder do processamento distribuído com Apache Spark (PySpark) para analisar os dados em um ambiente de larga escala. A ideia era conectar um cluster Spark no Databricks diretamente ao MongoDB Atlas, criando uma arquitetura altamente performática.
+
+No entanto, durante o desenvolvimento, nos deparamos com uma limitação técnica que nos forçou a repensar a abordagem. A versão Databricks Community Edition, que estávamos utilizando, removeu o acesso livre a clusters computacionais. Sem um cluster, a execução do PySpark e a integração com o MongoDB através do conector spark-mongodb se tornaram inviáveis para nós.
+
+Diante desse obstáculo, adaptamos nossa estratégia. Em vez de abandonar o projeto, decidimos pivotar a solução, mantivemos o ambiente Databricks e o MongoDB Atlas, mas substituímos o PySpark pela biblioteca PyMongo. Essa mudança nos permitiu interagir diretamente com o banco de dados via Python, garantindo a integridade do pipeline. Embora não seja uma solução de processamento distribuído, essa adaptação demonstrou nossa capacidade de resolver problemas e ainda assim entregar um fluxo de trabalho funcional e integrado, que era um dos objetivos centrais do trabalho.
 
 ## Autores
 
@@ -172,7 +170,7 @@ A matriz de confusão abaixo detalha os acertos e erros do modelo, onde a classe
 | **Verdadeiro: Real (1)** | 51 ❌ (Falso Negativo - FN)       | 4196 ✅ (Verdadeiro Positivo - TP) |
 
 ##### Interpretação:
-  - O modelo classificou corretamente **4684** notícias falsas e **4196** notícias verdadeiras.
+  - A análise da matriz revela um modelo bem-sucedido, com um número expressivo de acertos. Classificamos corretamente **4684** notícias falsas e **4196** notícias verdadeiras.
   - Os erros foram mínimos: apenas **49** notícias verdadeiras foram classificadas como falsas (falsos positivos) e **51** notícias falsas foram consideradas verdadeiras (falsos negativos).
   - Essa alta taxa de acerto confirma que o modelo de Regressão Logística é extremamente eficaz e robusto para este problema.
 
@@ -233,7 +231,7 @@ Este trabalho realizou uma análise detalhada de fake news utilizando uma infrae
 
 A arquitetura provou-se escalável e flexível, permitindo adaptar a estrutura dos dados conforme novas necessidades surgiam. A análise linguística forneceu evidências robustas sobre as assinaturas da desinformação, como o uso excessivo de nomes de figuras públicas, tom emocional e ausência de fontes atribuídas. O modelo preditivo, baseado nessas características, alcançou um desempenho excelente, validando a eficácia da abordagem.
 
-Os resultados sugerem que a combinação dessas features pode servir como base para sistemas de classificação automática mais sofisticados. Para o público geral, estes achados oferecem indicadores práticos para a identificação de conteúdo suspeito. Como próximos passos, sugere-se a integração dessas descobertas em modelos mais avançados e a criação de materiais educativos que traduzam esses padrões em orientações acessíveis.
+Isso reforça que, embora a tecnologia seja uma ferramenta poderosa, a luta contra a desinformação também depende da nossa capacidade de compreender as nuances da linguagem. Como próximos passos, imaginamos a evolução deste pipeline para operar em tempo real e a criação de ferramentas educativas baseadas em nossas descobertas, tornando a análise de dados mais acessível para o público geral.
 
 ## Demais anotações e referências
 
