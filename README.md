@@ -142,6 +142,7 @@ Nesta fase, o desempenho do modelo de classificação foi rigorosamente avaliado
 
 Para este projeto, foram testados diferentes modelos de classificação para a tarefa de detecção de fake news. Dentre as abordagens avaliadas, o modelo de Regressão Logística foi o que apresentou a melhor performance, demonstrando uma capacidade excepcional de distinguir entre os textos com uma acurácia de 99% no conjunto de teste, além de métricas de precisão e recall quase perfeitas para ambas as classes.
 
+
 #### Relatório de Classificação:
 
 ```
